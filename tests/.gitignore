@@ -1,0 +1,6 @@
+# Test results — uploaded as GitHub Actions artifacts, not committed
+test-results/
+*.xlsx
+__pycache__/
+*.pyc
+.pytest_cache/
