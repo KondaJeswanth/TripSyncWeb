@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 30
 
     env:
-      TRIPSYNC_URL:    ${{ secrets.TRIPSYNC_URL    || 'https://abineshh502.github.io/TripSyncWeb' }}
+      TRIPSYNC_URL:    ${{ secrets.TRIPSYNC_URL    || 'https://abineshh502.github.io/TripSyncWeb-Frontend' }}
       TRIPSYNC_API_URL: ${{ secrets.TRIPSYNC_API_URL || 'https://tripsyncweb-backend.onrender.com' }}
       HEADLESS:        "true"
       TIMEOUT:         "25"
@@ -150,9 +150,10 @@ jobs:
           summary_lines.append("Click **TripSync-E2E-Report-** to download.\n\n")
           summary_lines.append("### Test Categories Covered\n")
           summary_lines.append("| Category | Tests | Coverage |\n|----------|-------|----------|\n")
-          summary_lines.append("| Functional | 25 | Landing, Login, Register, All 14 Dashboard pages, Mobile viewport |\n")
-          summary_lines.append("| Vulnerability | 10 | XSS, SQLi, Open Redirect, HTTPS, Clickjacking, Prototype pollution |\n")
-          summary_lines.append("| API Unit | 12 | All 7 endpoints, CORS, error handling, response validation |\n\n")
+          summary_lines.append("| Functional | 70 | Landing, Login, Register, All 14 Dashboard pages, Mobile viewport |\n")
+          summary_lines.append("| Vulnerability | 45 | XSS, SQLi, Open Redirect, HTTPS, Clickjacking, Prototype pollution, traversal |\n")
+          summary_lines.append("| API Unit | 45 | All 7 endpoints, CORS, error handling, response validation, parameters |\n")
+          summary_lines.append("| UI/UX | 25 | Glassmorphism, animations, hover transition effects, color contrast borders |\n\n")
           summary_lines.append(f"\n*Generated: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S UTC')}*\n")
 
           with open(os.environ.get('GITHUB_STEP_SUMMARY', '/dev/null'), 'w') as f:
