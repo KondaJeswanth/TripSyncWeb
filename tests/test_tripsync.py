@@ -78,7 +78,20 @@ def _build_driver() -> webdriver.Chrome:
     opts.add_argument("--ignore-certificate-errors")
     opts.add_argument("--log-level=3")
     opts.add_experimental_option("excludeSwitches", ["enable-logging"])
-    service = Service(ChromeDriverManager().install())
+
+    import platform, shutil
+    if platform.system() == "Linux":
+        # GitHub Actions / Ubuntu runner — chromedriver is in PATH via setup-chrome action
+        driver_path = shutil.which("chromedriver") or "/usr/bin/chromedriver"
+        service = Service(executable_path=driver_path)
+    else:
+        # Windows local — use ChromeDriverManager
+        try:
+            service = Service(ChromeDriverManager().install())
+        except Exception:
+            local_driver = r"C:\Users\konda\.wdm\drivers\chromedriver\win64\149.0.7827.115\chromedriver-win32\chromedriver.exe"
+            service = Service(executable_path=local_driver)
+
     return webdriver.Chrome(service=service, options=opts)
 
 
